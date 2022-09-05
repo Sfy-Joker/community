@@ -17,11 +17,11 @@ public class AuthorizeController {
     @Value("${github.client.id}")
     private String client_id;
 
-    @Value("${github.redirect.uri}")
-    private String redirect_uri;
-
     @Value("${github.client.secret}")
     private String client_secret;
+
+    @Value("${github.redirect.uri}")
+    private String redirect_uri;
 
     @GetMapping("/callback")
     public String getCallback(@RequestParam("code") String code,
