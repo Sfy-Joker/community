@@ -15,6 +15,7 @@
 
 [flyway](https://flywaydb.org/documentation/)
 
+
 ```sql
 -- auto-generated definition
 create table USERS
@@ -30,4 +31,8 @@ create table USERS
 );
 
 
+```
+
+```bash
+mvn flyway:migrete
 ```
