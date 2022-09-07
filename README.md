@@ -13,6 +13,8 @@
 
 [Spring Boot Mybatis](https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/)
 
+[flyway](https://flywaydb.org/documentation/)
+
 ```sql
 -- auto-generated definition
 create table USERS
