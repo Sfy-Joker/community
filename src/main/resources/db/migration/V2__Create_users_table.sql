@@ -2,9 +2,9 @@
 
 create table users
 (
-    ID           INTEGER auto_increment,
-    ACCOUNT_ID   CHARACTER,
-    NAME         CHARACTER,
+    ID           int auto_increment,
+    ACCOUNT_ID   CHARACTER(50),
+    NAME         CHARACTER(50),
     TOKEN        CHARACTER(36),
     GMT_CREATE   BIGINT,
     GMT_MODIFIED BIGINT,
