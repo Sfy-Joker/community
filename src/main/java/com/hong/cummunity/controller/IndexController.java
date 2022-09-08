@@ -16,17 +16,18 @@ public class IndexController {
     private UserMapper userMapper;
 
     @GetMapping(value = "/")
-    public String toHello(String name,
-                          Model model,
-                          HttpServletRequest request){
-        for (Cookie cookie : request.getCookies()) {
-            if(cookie.getName().equals("token")){
-                String value = cookie.getValue();
-                User user = userMapper.findByToken(value);
-                if(user != null){
-                    request.getSession().setAttribute("user", user);
+    public String toIndex(HttpServletRequest request){
+        Cookie[] cookies = request.getCookies();
+        if(request.getCookies() != null && request.getCookies().length != 0){
+            for (Cookie cookie : cookies) {
+                if(cookie.getName().equals("token")){
+                    String value = cookie.getValue();
+                    User user = userMapper.findByToken(value);
+                    if(user != null){
+                        request.getSession().setAttribute("user", user);
+                    }
+                    break;
                 }
-                break;
             }
         }
         return "index";

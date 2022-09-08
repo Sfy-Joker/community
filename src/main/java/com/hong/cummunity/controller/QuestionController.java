@@ -55,22 +55,25 @@ public class QuestionController {
         }
 
         User user = null;
-        for (Cookie cookie : request.getCookies()) {
-            if(cookie.getName().equals("token")){
-                String value = cookie.getValue();
-                user = userMapper.findByToken(value);
-                if(user != null){
-                    request.getSession().setAttribute("user", user);
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null && cookies.length != 0){
+            for (Cookie cookie : cookies) {
+                if(cookie.getName().equals("token")){
+                    String value = cookie.getValue();
+                    user = userMapper.findByToken(value);
+                    if(user != null){
+                        request.getSession().setAttribute("user", user);
 
-                    Question question = new Question();
-                    question.setTitle(title);
-                    question.setDescription(description);
-                    question.setGmtCreate(System.currentTimeMillis());
-                    question.setGmtModified(question.getGmtCreate());
-                    question.setCreator(user.getId());
-                    questionMapper.addQuestion(question);
+                        Question question = new Question();
+                        question.setTitle(title);
+                        question.setDescription(description);
+                        question.setGmtCreate(System.currentTimeMillis());
+                        question.setGmtModified(question.getGmtCreate());
+                        question.setCreator(user.getId());
+                        questionMapper.addQuestion(question);
+                    }
+                    break;
                 }
-                break;
             }
         }
 
