@@ -1,9 +1,10 @@
-package com.hong.cummunity.model;
+package com.hong.cummunity.dto;
 
+import com.hong.cummunity.model.User;
 import lombok.Data;
 
 @Data
-public class Question {
+public class QuestionDTO {
     private String title;
     private String description;
     private Long gmtCreate;
@@ -12,5 +13,6 @@ public class Question {
     private Integer commentCount;
     private Integer viewCount;
     private Integer likeCount;
+    private User user;
 
 }
