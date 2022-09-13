@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
@@ -44,22 +43,26 @@ public class AuthorizeController {
         accessTokenDTO.setState(state);
         accessTokenDTO.setRedirect_uri(this.redirect_uri);
         String token = githubProvider.getAccessToken(accessTokenDTO);
-        System.out.println("token"+token);
 
         GithubUser githubUser = githubProvider.getUser(token);
-        System.out.println(githubUser.getAvatar_url());
+
         if(githubUser != null){
             //登录成功 获取cookie和session
             User user = new User();
-            user.setToken(UUID.randomUUID().toString());
-            user.setName(githubUser.getName());
-            user.setAccountId(String.valueOf(githubUser.getId()));
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
-            user.setAvatarUrl(githubUser.getAvatar_url());
-            userMapper.addUser(user);
+            User byAccountIdFindUser = userMapper.findByAccount(githubUser.getId());
+            if(byAccountIdFindUser == null){
+                user.setToken(UUID.randomUUID().toString());
+                user.setName(githubUser.getName());
+                user.setAccountId(githubUser.getId());
+                user.setGmtCreate(System.currentTimeMillis());
+                user.setGmtModified(user.getGmtCreate());
+                user.setAvatarUrl(githubUser.getAvatar_url());
+                userMapper.addUser(user);
+                response.addCookie(new Cookie("token", user.getToken()));
+            }else{
+                response.addCookie(new Cookie("token", byAccountIdFindUser.getToken()));
+            }
 
-            response.addCookie(new Cookie("token", user.getToken()));
             return "redirect:/";
         }else{
             //登录失败
