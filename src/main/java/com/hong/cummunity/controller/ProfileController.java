@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class ProfileController {
@@ -29,21 +30,7 @@ public class ProfileController {
                             @RequestParam(name = "currentPage", defaultValue = "1") Integer currentPage,
                             @RequestParam(name = "seize", defaultValue = "2") Integer size) {
 
-        Cookie[] cookies = request.getCookies();
-        User user = null;
-        if (request.getCookies() != null && request.getCookies().length != 0) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
-                    String value = cookie.getValue();
-                    user = userMapper.findByToken(value);
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);
-                    }
-                    break;
-                }
-            }
-        }
-
+        User user = (User) request.getSession().getAttribute("user");
         if(user == null){
             return "redirect:/";
         }

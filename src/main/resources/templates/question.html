@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${questionDTO.title}"></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/publish.css" type="text/css">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+</head>
+<body class="main">
+<div th:insert="~{navigition :: #my-nav}"></div>
+<div class="container-fluid">
+    <div class="row content-bj">
+        <div class="col-lg-9 col-md-12  col-sm-12 col-xs-12">
+            <span class="h2" aria-hidden="true">[[${questionDTO.user.id}]]</span>
+            <span>
+                作者：[[${questionDTO.user.name}]] |
+                发布时间：[[${#dates.format(questionDTO.gmtCreate, 'yyyy-MM-dd HH:mm')}]] |
+                阅读数：[[${questionDTO.viewCount == null || questionDTO.viewCount == 0 ? 0 : questionDTO.viewCount}]]
+            </span>
+            <hr>
+            <span th:text="${questionDTO.description}"></span>
+            <hr>
+            <a th:href="@{'/publish/'+${questionDTO.id}}">
+                <span class="glyphicon glyphicon-pencil h2 question-edit" aria-hidden="true"
+                      th:if="${session.user!=null && session.user.name==questionDTO.user.name}">
+                    编辑
+                </span>
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-12  col-sm-12 col-xs-12">
+            <h4>发起人</h4>
+            <div class="media-left">
+                <a href="#">
+                    <img class="media-object img-circle question-avatar" th:src="${questionDTO.user.avatarUrl}">
+                </a>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading" th:text="${questionDTO.user.name}"></h4>
+            </div>
+            <hr>
+            <h4>相关问题</h4>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</html>

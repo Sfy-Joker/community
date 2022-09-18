@@ -1,10 +1,7 @@
 package com.hong.cummunity.mapper;
 
 import com.hong.cummunity.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
@@ -20,4 +17,7 @@ public interface UserMapper {
 
     @Select("select * from users where account_id = #{account_id}")
     User findByAccount(@Param("account_id") String account_id);
+
+    @Update("update users set name = #{name}, token = #{token}, gmt_modified = #{gmtModified}, avatar_url = #{avatarUrl} where id = #{id}")
+    void updateUser(User user);
 }

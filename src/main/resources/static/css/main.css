@@ -7,3 +7,15 @@
     font-weight: normal;
     color: #999;
 }
+.question-edit{
+    font-size: 13px;
+    color: #999;
+}
+.question-edit:hover{
+    text-decoration: underline;
+    color: #333;
+}
+.question-avatar{
+    width: 50px;
+    height: 50px;
+}

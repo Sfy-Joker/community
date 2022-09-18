@@ -24,7 +24,10 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading" th:text="${question.title}"></h4>
+                        <a th:href="@{'/question/'+${question.id}}">
+                            <span class="media-heading h4" th:text="${question.title}"></span>
+                        </a>
+                        <br>
                         [[${question.description}]]
                         <span class="text-des-color">
                             [[${question.commentCount == null || question.commentCount == 0?0:question.commentCount}]] 个回复 •

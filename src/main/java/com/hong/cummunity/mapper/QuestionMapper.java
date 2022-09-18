@@ -1,22 +1,19 @@
 package com.hong.cummunity.mapper;
 
 import com.hong.cummunity.model.Question;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
 @Mapper
 public interface QuestionMapper {
-    @Insert("insert into question (title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count) values (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{commentCount},#{viewCount},#{likeCount})")
+    @Insert("insert into question (title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count,tag) values (#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{commentCount},#{viewCount},#{likeCount},#{tag})")
     void addQuestion(Question question);
 
-    @Select("select title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count from question limit #{offset}, #{size}")
+    @Select("select * from question limit #{offset}, #{size}")
     List<Question> getQuestions(@Param("offset") Integer offset, @Param("size") Integer size);
 
-    @Select("select title,description,gmt_create,gmt_modified,creator,comment_count,view_count,like_count from question limit #{offset}, #{size}")
+    @Select("select * from question limit #{offset}, #{size}")
     List<Question> getQuestionsById(@Param("creator") Integer userId, @Param("offset") Integer offset, @Param("size") Integer size);
 
     @Select("select count(1) from question")
@@ -25,4 +22,12 @@ public interface QuestionMapper {
     @Select("select count(1) from question where creator = #{creator}")
     Integer countById(@Param("creator") Integer userId);
 
+    @Select("select * from question where id = #{id}")
+    Question findQuestionById(@Param("id") Integer id);
+
+    @Update("update question set title = #{title}, description = #{description}, gmt_modified = #{gmtModified}, tag = #{tag} where id = #{id}")
+    void update(Question question);
+
+    @Update("update question set view_count = #{viewCount} + 1 where id = #{id}")
+    Integer updateViewCount(Question question);
 }

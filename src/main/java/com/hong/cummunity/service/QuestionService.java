@@ -61,4 +61,32 @@ public class QuestionService {
 
         return paginationDTO;
     }
+
+    public QuestionDTO findQuestionById(Integer id) {
+        Question question = questionMapper.findQuestionById(id);
+        User user = userMapper.findById(question.getCreator());
+        QuestionDTO questionDTO = new QuestionDTO();
+        BeanUtils.copyProperties(question, questionDTO);
+        questionDTO.setUser(user);
+        return questionDTO;
+    }
+
+    public void createOrUpdate(Question question) {
+        Question dbQuestion = questionMapper.findQuestionById(question.getId());
+        if(dbQuestion == null){
+            questionMapper.addQuestion(question);
+        }else{
+            question.setGmtModified(System.currentTimeMillis());
+            questionMapper.update(question);
+        }
+    }
+
+    public Integer updateViewCount(Integer id) {
+        Question question = questionMapper.findQuestionById(id);
+        if(question.getViewCount() == null){
+            question.setViewCount(1);
+        }
+        int i = questionMapper.updateViewCount(question);
+        return i;
+    }
 }
