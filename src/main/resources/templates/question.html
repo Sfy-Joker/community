@@ -24,9 +24,8 @@
             <span th:text="${questionDTO.description}"></span>
             <hr>
             <a th:href="@{'/publish/'+${questionDTO.id}}">
-                <span class="glyphicon glyphicon-pencil h2 question-edit" aria-hidden="true"
-                      th:if="${session.user!=null && session.user.name==questionDTO.user.name}">
-                    编辑
+                <span class="glyphicon glyphicon-pencil question-edit" aria-hidden="true"
+                      th:if="${session.user!=null && session.user.name==questionDTO.user.name}">编辑
                 </span>
             </a>
         </div>

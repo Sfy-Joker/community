@@ -1,11 +1,12 @@
 # 工程简介
 
-
-
 # 延伸阅读
 
-# 资料
+# 参考资料
+
 [GitHub-OAuth](https://docs.github.com/cn/developers/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps)
+
+[bootstrap](https://v3.bootcss.com/)
 
 [OKHttp](https://square.github.io/okhttp/)
 
@@ -15,24 +16,10 @@
 
 [flyway](https://flywaydb.org/documentation/)
 
-
-```sql
--- auto-generated definition
-create table USERS
-(
-    ID           INTEGER auto_increment,
-    ACCOUNT_ID   CHARACTER,
-    NAME         CHARACTER,
-    TOKEN        CHARACTER(36),
-    GMT_CREATE   BIGINT,
-    GMT_MODIFIED BIGINT,
-    constraint USER_T_PK
-        primary key (ID)
-);
-
-
-```
+[elastic](https://elasticsearch.cn/)
 
 ```bash
-mvn flyway:migrete
+rm ~/community.*   # 删除h2项目数据库文件
+mvn flyway:migrete  # flyway重新加载在sql脚本创建数据库
+git config --global http.sslVerify "false"  # 解决git无法输入github账号密码
 ```

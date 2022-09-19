@@ -38,7 +38,6 @@ public class QuestionService {
         Integer totalCount = questionMapper.count();
         paginationDTO.handle(currentPage, size, totalCount);
 
-
         return paginationDTO;
     }
 
@@ -64,6 +63,9 @@ public class QuestionService {
 
     public QuestionDTO findQuestionById(Integer id) {
         Question question = questionMapper.findQuestionById(id);
+        if (question == null) {
+            return null;
+        }
         User user = userMapper.findById(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question, questionDTO);
@@ -73,9 +75,18 @@ public class QuestionService {
 
     public void createOrUpdate(Question question) {
         Question dbQuestion = questionMapper.findQuestionById(question.getId());
-        if(dbQuestion == null){
+        if (dbQuestion == null) {
+            if (question.getViewCount() == null) {
+                question.setViewCount(0);
+            }
+            if (question.getCommentCount() == null) {
+                question.setCommentCount(0);
+            }
+            if (question.getLikeCount() == null) {
+                question.setLikeCount(0);
+            }
             questionMapper.addQuestion(question);
-        }else{
+        } else {
             question.setGmtModified(System.currentTimeMillis());
             questionMapper.update(question);
         }
@@ -83,10 +94,14 @@ public class QuestionService {
 
     public Integer updateViewCount(Integer id) {
         Question question = questionMapper.findQuestionById(id);
-        if(question.getViewCount() == null){
+        if (question.getViewCount() == null) {
             question.setViewCount(1);
         }
         int i = questionMapper.updateViewCount(question);
         return i;
+    }
+
+    public void addCommentCount(QuestionDTO question) {
+        questionMapper.addCommentCount(question);
     }
 }

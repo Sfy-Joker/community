@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>error</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+</head>
+<body class="error-body">
+<div class="jumbotron">
+    <h1>Hello, world!</h1>
+    <p th:text="${errorMessage}" th:if="${errorMessage != null}"></p>
+    <p th:if="${errorMessage == null}">页面没有找到，请您换个姿势再试试。</p>
+    <p><a class="btn btn-primary btn-lg" href="/" role="button">返回首页</a></p>
+</div>
+</body>
+<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</html>

@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css">
     <link rel="stylesheet" href="/css/publish.css" type="text/css">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
 </head>
 <body class="main">
 <div th:insert="~{/navigition :: #my-nav}"></div>
 <div class="container-fluid">
     <div class="row content-bj">
         <div class="col-lg-9 col-md-12  col-sm-12 col-xs-12">
-            <span class="glyphicon glyphicon-plus h2" aria-hidden="true">编辑</span>
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            <span class="h2">编辑</span>
             <hr>
             <form action="/publish" method="post">
                 <input type="hidden" name="id" th:value="${id}" th:if="${id != null}">

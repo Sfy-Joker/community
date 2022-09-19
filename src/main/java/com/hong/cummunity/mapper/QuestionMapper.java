@@ -1,5 +1,6 @@
 package com.hong.cummunity.mapper;
 
+import com.hong.cummunity.dto.QuestionDTO;
 import com.hong.cummunity.model.Question;
 import org.apache.ibatis.annotations.*;
 
@@ -30,4 +31,7 @@ public interface QuestionMapper {
 
     @Update("update question set view_count = #{viewCount} + 1 where id = #{id}")
     Integer updateViewCount(Question question);
+
+    @Update("update question set comment_count = #{commentCount} + 1 where id = #{id}")
+    void addCommentCount(QuestionDTO question);
 }
