@@ -6,7 +6,6 @@ import com.hong.cummunity.mapper.CommentMapper;
 import com.hong.cummunity.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CommentService {
@@ -16,7 +15,6 @@ public class CommentService {
     @Autowired
     private QuestionService questionService;
 
-    @Transactional
     public void createComment(Comment comment) {
 
         if (comment.getType() == 0 || comment.getType() == null || comment.getType() > 2) {
