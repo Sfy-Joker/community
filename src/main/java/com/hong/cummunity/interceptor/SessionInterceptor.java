@@ -1,5 +1,6 @@
 package com.hong.cummunity.interceptor;
 
+import com.hong.cummunity.exception.CustomizeException;
 import com.hong.cummunity.mapper.UserMapper;
 import com.hong.cummunity.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         if (cookies == null || cookies.length == 0) {
             session.removeAttribute("user");
-            return true;
+            throw new CustomizeException("用户未登录，请先登录");
         }
         User user = null;
         for (Cookie cookie : cookies) {

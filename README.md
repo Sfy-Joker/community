@@ -20,6 +20,6 @@
 
 ```bash
 rm ~/community.*   # 删除h2项目数据库文件
-mvn flyway:migrete  # flyway重新加载在sql脚本创建数据库
+mvn flyway:migrate  # flyway重新加载在sql脚本创建数据库
 git config --global http.sslVerify "false"  # 解决git无法输入github账号密码
 ```
