@@ -2,6 +2,8 @@ package com.hong.cummunity.service;
 
 import com.hong.cummunity.dto.PaginationDTO;
 import com.hong.cummunity.dto.QuestionDTO;
+import com.hong.cummunity.exception.CustomizeErrorCode;
+import com.hong.cummunity.exception.CustomizeException;
 import com.hong.cummunity.mapper.QuestionMapper;
 import com.hong.cummunity.mapper.UserMapper;
 import com.hong.cummunity.model.Question;
@@ -64,7 +66,7 @@ public class QuestionService {
     public QuestionDTO findQuestionById(Integer id) {
         Question question = questionMapper.findQuestionById(id);
         if (question == null) {
-            return null;
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FIND);
         }
         User user = userMapper.findById(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
@@ -92,13 +94,12 @@ public class QuestionService {
         }
     }
 
-    public Integer updateViewCount(Integer id) {
+    public void updateViewCount(Integer id) {
         Question question = questionMapper.findQuestionById(id);
         if (question.getViewCount() == null) {
             question.setViewCount(1);
         }
-        int i = questionMapper.updateViewCount(question);
-        return i;
+        questionMapper.updateViewCount(question);
     }
 
     public void addCommentCount(QuestionDTO question) {

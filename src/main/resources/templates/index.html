@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="/css/publish.css" type="text/css">
     <link rel="stylesheet" href="/css/main.css" type="text/css">
 </head>
+<script type="text/javascript">
+    var closable = window.localStorage.getItem('closable');
+    if (closable == 'true') {
+        window.close()
+    }
+</script>
 <body class="main">
 <div th:insert="~{navigition :: #my-nav}"></div>
 <div class="container-fluid">
@@ -46,7 +52,8 @@
                         </a>
                     </li>
                     <li>
-                        <a th:if="${paginationDTO.showPreviousPage}" th:href="@{/(currentPage=${paginationDTO.currentPage-1 < 1 ? 1 : paginationDTO.currentPage-1})}"
+                        <a th:if="${paginationDTO.showPreviousPage}"
+                           th:href="@{/(currentPage=${paginationDTO.currentPage-1 < 1 ? 1 : paginationDTO.currentPage-1})}"
                            aria-label="Previous">
                             <span aria-hidden="true">&lsaquo;</span>
                         </a>
@@ -56,13 +63,15 @@
                         <a th:href="@{/(currentPage=${page})}" th:text="${page}"></a>
                     </li>
                     <li>
-                        <a th:if="${paginationDTO.showNextPage}" th:href="@{/(currentPage=${paginationDTO.currentPage+1})}"
+                        <a th:if="${paginationDTO.showNextPage}"
+                           th:href="@{/(currentPage=${paginationDTO.currentPage+1})}"
                            aria-label="Next">
                             <span aria-hidden="true">&rsaquo;</span>
                         </a>
                     </li>
                     <li>
-                        <a th:if="${paginationDTO.showEndPage}" th:href="@{/(currentPage=${paginationDTO.totalPage})}" aria-label="End">
+                        <a th:if="${paginationDTO.showEndPage}" th:href="@{/(currentPage=${paginationDTO.totalPage})}"
+                           aria-label="End">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

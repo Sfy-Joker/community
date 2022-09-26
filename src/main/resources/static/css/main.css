@@ -27,11 +27,25 @@
 .jumbotron {
     margin: 0 30px;
 }
-.glyphicon{
+
+.glyphicon {
     font-size: 26px;
 }
 
 .question-edit {
     font-size: 13px;
     color: #999;
+}
+
+.question-username {
+    padding-top: 15px;
+}
+
+.question-account, .question-textarea {
+    margin-top: 20px;
+}
+
+.question-btn {
+    margin-top: 20px;
+    float: right;
 }
